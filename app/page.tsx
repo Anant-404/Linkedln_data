@@ -68,6 +68,14 @@ export default function Home() {
               {getLocation() && <p className="text-gray-400 text-sm">{getLocation()}</p>}
             </div>
 
+            {/* About Section */}
+            {profile.summary && (
+              <div>
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">About</h3>
+                <p className="text-gray-300 whitespace-pre-line">{profile.summary}</p>
+              </div>
+            )}
+
             {/* Experience */}
             {profile.experiences?.length > 0 && (
               <div>
