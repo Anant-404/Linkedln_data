@@ -7,7 +7,7 @@ export default function Home() {
   const [profile, setProfile] = useState<any>(null);
 
   const handleSubmit = async () => {
-    console.log("🚀 Fetching profile for:", url);
+    console.log(" Fetching profile for:", url);
 
     try {
       const res = await fetch('/api/fetch-profile', {
@@ -17,10 +17,10 @@ export default function Home() {
       });
 
       const data = await res.json();
-      console.log("📦 Received profile data:", data);
+      console.log(" Received profile data:", data);
       setProfile(data);
     } catch (error) {
-      console.error("❌ Error fetching profile:", error);
+      console.error(" Error fetching profile:", error);
     }
   };
 
@@ -113,21 +113,21 @@ export default function Home() {
             )}
 
             {/* Skills */}
-{profile.skills?.length > 0 && (
-  <div>
-    <h3 className="text-lg font-semibold text-blue-400 mb-2">Skills</h3>
-    <div className="flex flex-wrap gap-2">
-      {profile.skills.map((skill: string, index: number) => (
-        <span
-          key={index}
-          className="bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow hover:bg-blue-700 transition"
-        >
-          {skill}
-        </span>
-      ))}
-    </div>
-  </div>
-)}
+           {profile.skills?.length > 0 && (
+             <div>
+               <h3 className="text-lg font-semibold text-blue-400 mb-2">Skills</h3>
+               <div className="flex flex-wrap gap-2">
+                 {profile.skills.map((skill: string, index: number) => (
+                   <span
+                     key={index}
+                     className="bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow hover:bg-blue-700 transition"
+                   >
+                     {skill}
+                   </span>
+                 ))}
+               </div>
+             </div>
+           )}
 
             {/* Projects */}
             {profile.accomplishment_projects?.length > 0 && (

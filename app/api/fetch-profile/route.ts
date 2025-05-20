@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
 
   const queryParams = new URLSearchParams({
     url,
-    realtime: "true", // 👈 this forces live scraping
+    realtime: "true",
     fallback_to_cache: "on-error",
-    use_cache: "if-recent", // optional, can be 'if-present' or 'never'
+    use_cache: "if-recent",
     skills: "include",
     personal_email: "include",
     personal_contact_number: "include",
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   );
 
   const data = await response.json();
-  console.log("✅ Cleaned Proxycurl API response:", data);
+  console.log(" Cleaned Proxycurl API response:", data);
 
   return new Response(JSON.stringify(data), {
     status: response.status,
