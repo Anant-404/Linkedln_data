@@ -11,8 +11,9 @@ export async function POST(req: NextRequest) {
 
   const queryParams = new URLSearchParams({
     url,
+    realtime: "true", // 👈 this forces live scraping
     fallback_to_cache: "on-error",
-    use_cache: "if-present",
+    use_cache: "if-recent", // optional, can be 'if-present' or 'never'
     skills: "include",
     personal_email: "include",
     personal_contact_number: "include",
