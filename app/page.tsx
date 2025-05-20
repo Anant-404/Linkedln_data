@@ -24,7 +24,6 @@ export default function Home() {
     }
   };
 
-  // Build location string only if present
   const getLocation = () => {
     if (!profile) return '';
     const parts = [profile.city, profile.state, profile.country_full_name];
@@ -52,27 +51,77 @@ export default function Home() {
         </button>
 
         {profile && (
-          <div className="mt-6 p-6 bg-gray-700 rounded-lg shadow-lg text-white">
-            <img
-              src={
-                profile.profile_pic_url ||
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name)}`
-              }
-              alt="Profile"
-              className="w-24 h-24 rounded-full mb-4 border-4 border-blue-500 shadow-lg object-cover"
-            />
-            <h2 className="text-xl font-semibold text-white mb-2">{profile.full_name}</h2>
+          <div className="mt-6 p-6 bg-gray-700 rounded-lg shadow-lg text-white space-y-6">
+            {/* Profile Header */}
+            <div className="text-center">
+              <img
+                src={
+                  profile.profile_pic_url ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name)}`
+                }
+                alt="Profile"
+                className="w-24 h-24 mx-auto rounded-full mb-4 border-4 border-blue-500 shadow-lg object-cover"
+              />
+              <h2 className="text-xl font-semibold mb-2">{profile.full_name}</h2>
+              {profile.headline && <p className="text-gray-300">{profile.headline}</p>}
+              {profile.occupation && <p className="italic text-gray-400">{profile.occupation}</p>}
+              {getLocation() && <p className="text-gray-400 text-sm">{getLocation()}</p>}
+            </div>
 
-            {profile.headline && (
-              <p className="text-gray-300 mb-2">{profile.headline}</p>
+            {/* Experience */}
+            {profile.experiences?.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">Experience</h3>
+                <ul className="space-y-3">
+                  {profile.experiences.map((exp: any, index: number) => (
+                    <li key={index} className="bg-gray-800 p-4 rounded-lg shadow">
+                      <h4 className="font-bold text-white">{exp.title} @ {exp.company}</h4>
+                      <p className="text-sm text-gray-400">{exp.location}</p>
+                      {exp.description && (
+                        <p className="text-sm text-gray-300 mt-1">{exp.description}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
-            {profile.occupation && (
-              <p className="text-gray-400 mb-1 italic">{profile.occupation}</p>
+            {/* Education */}
+            {profile.education?.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">Education</h3>
+                <ul className="space-y-3">
+                  {profile.education.map((edu: any, index: number) => (
+                    <li key={index} className="bg-gray-800 p-4 rounded-lg shadow">
+                      <h4 className="font-bold text-white">{edu.school}</h4>
+                      <p className="text-sm text-gray-400">{edu.degree_name} in {edu.field_of_study}</p>
+                      {edu.description && (
+                        <p className="text-sm text-gray-300 mt-1">{edu.description}</p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
-            {getLocation() && (
-              <p className="text-gray-400 text-sm">{getLocation()}</p>
+            {/* Projects */}
+            {profile.accomplishment_projects?.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold text-blue-400 mb-2">Projects</h3>
+                <ul className="space-y-3">
+                  {profile.accomplishment_projects.map((proj: any, index: number) => (
+                    <li key={index} className="bg-gray-800 p-4 rounded-lg shadow">
+                      <h4 className="font-bold text-white">{proj.title}</h4>
+                      {proj.description && (
+                        <p className="text-sm text-gray-300 mt-1 whitespace-pre-line">{proj.description}</p>
+                      )}
+                      {proj.url && (
+                        <a href={proj.url} target="_blank" className="text-blue-400 text-sm underline mt-2 inline-block">View Project</a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         )}
