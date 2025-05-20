@@ -112,6 +112,23 @@ export default function Home() {
               </div>
             )}
 
+            {/* Skills */}
+{profile.skills?.length > 0 && (
+  <div>
+    <h3 className="text-lg font-semibold text-blue-400 mb-2">Skills</h3>
+    <div className="flex flex-wrap gap-2">
+      {profile.skills.map((skill: string, index: number) => (
+        <span
+          key={index}
+          className="bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow hover:bg-blue-700 transition"
+        >
+          {skill}
+        </span>
+      ))}
+    </div>
+  </div>
+)}
+
             {/* Projects */}
             {profile.accomplishment_projects?.length > 0 && (
               <div>
